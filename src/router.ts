@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import HelloVue from './views/HelloVue.vue';
 import Home from './views/Home.vue';
+import ConcertMap from './views/ConcertMap.vue';
 
 Vue.use(Router);
 
@@ -11,6 +12,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/map',
+      name: 'concertmap',
+      component: ConcertMap,
     },
     {
       path: '/hellovue',
