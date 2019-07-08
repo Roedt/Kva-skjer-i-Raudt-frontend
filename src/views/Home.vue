@@ -8,7 +8,7 @@
                 <th>Tidspunkt</th>
                 <th>Arrangør</th>
             </tr>
-            <tr v-for="event in events" :key="event.url">
+            <tr v-for="event in events" :key="event.url+event.host">
                 <td> <a :href=event.url>{{ event.title }}</a> </td>
                 <td> {{ event.time }} </td>
                 <td> {{ event.host }} </td>

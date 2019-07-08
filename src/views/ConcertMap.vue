@@ -1,6 +1,6 @@
 <template>
   <div class="concertmap">
-    <Map header="Upcoming concerts" />
+    <Map header="Kommande hendingar" />
   </div>
 </template>
 

@@ -4,7 +4,6 @@
         <div id="map">
             <l-map ref="map" :zoom="zoom" :center="center" :maxZoom="maxZoom">
                 <l-tile-layer :url="mapURL" :id="mapID" :attribution="attribution"></l-tile-layer>
-                <Vue2LeafletMarkerCluster></Vue2LeafletMarkerCluster>
             </l-map>
         </div>
     </div>
@@ -47,19 +46,18 @@ export default class Map extends Vue {
 
     constructor() {
         super();
-        new APICaller((e: any) => this.createMarker(e));
+        const caller = new APICaller((e: any) => this.createMarker(e));
     }
 
     private createMarker(event: SingleEvent) {
-        const marker = L.marker(new LatLng(event.lat, event.lon));
+        if (event.latlng === undefined) {
+            return;
+        }
+        const marker = L.marker(event.latlng);
         this.$nextTick(() => {
             const ref: any = this.$refs.map;
             const map = ref.mapObject;
-            marker.addTo(map).bindPopup(
-                event.time
-                + '<br/><a href='
-                + event.url.replace('//m.', '//www.') + '>'
-                + event.title + '</a> (' + event.host + ')');
+            marker.addTo(map).bindPopup(event.popup);
         });
 
 /*        'color': 'blue',
