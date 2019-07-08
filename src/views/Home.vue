@@ -7,13 +7,11 @@
                 <th>Tittel</th>
                 <th>Tidspunkt</th>
                 <th>Arrangør</th>
-                <th>URL</th>
             </tr>
-            <tr v-for="event in events">
-                <td> {{ event.title }} </td>
+            <tr v-for="event in events" :key="event.url">
+                <td> <a :href=event.url>{{ event.title }}</a> </td>
                 <td> {{ event.time }} </td>
                 <td> {{ event.host }} </td>
-                <td> <a :href=event.url>URL</a> </td>
             </tr>
         </table>
     </div>
@@ -23,14 +21,20 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import MetaEvent from '../types/MetaEvent.vue';
-import RESTResponse from '../types/RESTResponse.vue';
 import SingleEvent from '../types/SingleEvent.vue';
 
 Vue.use(VueAxios, axios);
 
 // tslint:disable-next-line:max-line-length
 const eventsLink: string = 'https://www.googleapis.com/storage/v1/b/fb-events2/o?prefix=events&fbclid=IwAR13SDH31uFm3hBeiR7i9pjF3ePV3VUB1qw1X5btoG03YKLIZWkwqnbzq34';
+
+interface MetaEvent {
+    mediaLink: string;
+}
+
+interface RESTResponse {
+    data: SingleEvent;
+}
 
 export default Vue.extend({
     data: () => ({
@@ -72,6 +76,10 @@ export default Vue.extend({
 
 table {
     margin: 0 auto;
+}
+
+td {
+    padding: 0.2rem 1.5rem;
 }
 
 img {
