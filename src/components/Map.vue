@@ -17,13 +17,8 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
-import L, { LatLng } from 'leaflet';
+import L from 'leaflet';
 import 'leaflet-defaulticon-compatibility';
-
-import axios from 'axios';
-import ConcertEvent from './ConcertEvent.vue';
 
 import APICaller from '../components/APICaller.vue';
 import SingleEvent from '../types/SingleEvent.vue';
@@ -70,6 +65,7 @@ export default class Map extends Vue {
 <style scoped lang="scss">
 
 @import "~leaflet/dist/leaflet.css";
+@import "~leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 
 div#map{
     height: 25rem; // 80%
