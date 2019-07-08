@@ -49,12 +49,19 @@ export default class APICaller extends Vue {
                 event.time = event.time.replace(' â', ' -').replace('UTC+02', '');
                 event.time = event.time.replace(' at ', ' ').split(' - ')[0];
                 event.time = event.time.replace(' Â·', '');
+                if (event.lat !== undefined && event.lon !== undefined) {
+                    event.latlng = [event.lat, event.lon];
+                }
 
                 if (Date.now() > Date.parse(event.time)) {
                     return;
                 }
 
                 event.url = event.url.replace('//m.', '//www.');
+                event.popup = event.time
+                + '<br/><a href='
+                + event.url.replace('//m.', '//www.') + '>'
+                + event.title + '</a> (' + event.host + ')';
 
                 this.events.push(event);
                 listener(event);

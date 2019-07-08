@@ -8,5 +8,8 @@ export default class SingleEvent extends Vue {
     @Prop() public url!: string;
     @Prop() public lat!: number;
     @Prop() public lon!: number;
+
+    @Prop() public latlng!: any;
+    @Prop() public popup!: string;
 }
 </script>
