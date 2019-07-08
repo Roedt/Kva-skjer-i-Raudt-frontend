@@ -4,6 +4,9 @@
         <div id="map">
             <l-map ref="map" :zoom="zoom" :center="center" :maxZoom="maxZoom">
                 <l-tile-layer :url="mapURL" :id="mapID" :attribution="attribution"></l-tile-layer>
+                <LMarker v-for="event in events" v-if="event.latlng !== null" :lat-lng="event.latlng" :key="event.url+event.host">
+                    <LPopup :content="event.popup" />
+                </LMarker>
             </l-map>
         </div>
     </div>
@@ -11,7 +14,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
+import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 
 import 'leaflet/dist/leaflet.css';
@@ -27,7 +30,7 @@ import SingleEvent from '../types/SingleEvent.vue';
 
 @Component({
     components: {
-        LMap, LTileLayer, LMarker,
+        LMap, LTileLayer, LMarker, LPopup,
     },
 })
 export default class Map extends Vue {
@@ -43,6 +46,7 @@ export default class Map extends Vue {
     private mapURL = 'https://api.tiles.mapbox.com/v4/' + this.mapID + '/{z}/{x}/{y}.png?access_token=' + this.accessToken;
     private mapURL2 = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
     private maxZoom = 20;
+    private events = [] as SingleEvent[];
 
     constructor() {
         super();
@@ -53,13 +57,7 @@ export default class Map extends Vue {
         if (event.latlng === undefined) {
             return;
         }
-        const marker = L.marker(event.latlng);
-        this.$nextTick(() => {
-            const ref: any = this.$refs.map;
-            const map = ref.mapObject;
-            marker.addTo(map).bindPopup(event.popup);
-        });
-
+        this.events.push(event);
 /*        'color': 'blue',
         'fillColor': '#f03',
         'fillOpacity': 0.5,
