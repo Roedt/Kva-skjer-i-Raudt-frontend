@@ -4,6 +4,7 @@
         <div id="map">
             <l-map ref="map" :zoom="zoom" :center="center" :maxZoom="maxZoom">
                 <l-tile-layer :url="mapURL" :id="mapID" :attribution="attribution"></l-tile-layer>
+                <Vue2LeafletMarkerCluster></Vue2LeafletMarkerCluster>
             </l-map>
         </div>
     </div>
@@ -12,6 +13,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import {LMap, LTileLayer, LMarker} from 'vue2-leaflet';
+import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster';
 
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css';
@@ -21,14 +23,12 @@ import 'leaflet-defaulticon-compatibility';
 import axios from 'axios';
 import ConcertEvent from './ConcertEvent.vue';
 
+import APICaller from '../components/APICaller.vue';
+import SingleEvent from '../types/SingleEvent.vue';
+
 @Component({
     components: {
         LMap, LTileLayer, LMarker,
-    },
-    methods: {
-        createMarker(event: ConcertEvent) {
-            const marker = L.marker(new LatLng(event.getLat(), event.getLon()));
-        },
     },
 })
 export default class Map extends Vue {
@@ -47,21 +47,19 @@ export default class Map extends Vue {
 
     constructor() {
         super();
-        this.createMarker(new ConcertEvent(66.1, 10.4));
+        new APICaller((e: any) => this.createMarker(e));
     }
 
-    private makeAPICall(url: string, callback: any) {
-        axios
-        .get(url)
-        .then((response: any) => callback(response));
-    }
-
-    private createMarker(event: ConcertEvent) {
-        const marker = L.marker(new LatLng(event.getLat(), event.getLon()));
+    private createMarker(event: SingleEvent) {
+        const marker = L.marker(new LatLng(event.lat, event.lon));
         this.$nextTick(() => {
             const ref: any = this.$refs.map;
             const map = ref.mapObject;
-            marker.addTo(map);
+            marker.addTo(map).bindPopup(
+                event.time
+                + '<br/><a href='
+                + event.url.replace('//m.', '//www.') + '>'
+                + event.title + '</a> (' + event.host + ')');
         });
 
 /*        'color': 'blue',
