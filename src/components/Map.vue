@@ -25,9 +25,11 @@ import 'leaflet-defaulticon-compatibility';
 import APICaller from '../components/APICaller.vue';
 import SingleEvent from '../types/SingleEvent.vue';
 
+Vue.component('Vue2LeafletMarkerCluster', Vue2LeafletMarkerCluster);
+
 @Component({
     components: {
-        LMap, LTileLayer, LMarker, LPopup, Vue2LeafletMarkerCluster,
+        LMap, LTileLayer, LMarker, LPopup,
     },
 })
 export default class Map extends Vue {
