@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Denne sida viser alle kommande hendingar frå Raudt- og lokale Raudt-lag sine Facebook-sider.</h1>
   </div>
 </template>
