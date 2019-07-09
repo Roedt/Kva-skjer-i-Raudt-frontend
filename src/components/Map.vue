@@ -4,9 +4,11 @@
         <div id="map">
             <l-map ref="map" :zoom="zoom" :center="center" :maxZoom="maxZoom">
                 <l-tile-layer :url="mapURL" :id="mapID" :attribution="attribution"></l-tile-layer>
+                <Vue2LeafletMarkerCluster>
                 <LMarker v-for="event in events" v-if="event.latlng !== null" :lat-lng="event.latlng" :key="event.url+event.host">
                     <LPopup :content="event.popup" />
                 </LMarker>
+                </Vue2LeafletMarkerCluster>
             </l-map>
         </div>
     </div>
@@ -25,7 +27,7 @@ import SingleEvent from '../types/SingleEvent.vue';
 
 @Component({
     components: {
-        LMap, LTileLayer, LMarker, LPopup,
+        LMap, LTileLayer, LMarker, LPopup, Vue2LeafletMarkerCluster,
     },
 })
 export default class Map extends Vue {
@@ -66,6 +68,8 @@ export default class Map extends Vue {
 
 @import "~leaflet/dist/leaflet.css";
 @import "~leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
 div#map{
     height: 25rem; // 80%
