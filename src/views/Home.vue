@@ -41,7 +41,12 @@ table {
 }
 
 td, th {
-    padding: 0.2rem 1.5rem;
+    @media screen and (max-width: 700px) {
+        padding: 0.2rem 0.5rem;
+    }
+    @media screen and (min-width: 700px) {
+        padding: 0.2rem 1.5rem;
+    }
 }
 
 img {

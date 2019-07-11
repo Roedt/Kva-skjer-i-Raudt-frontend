@@ -73,12 +73,18 @@ export default class Map extends Vue {
 @import "~leaflet.markercluster/dist/MarkerCluster.css";
 @import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
 
+@media screen and (max-width: 720px) {
+    div#map {
+        width: 100%;
+    }
+}
+
 div#map{
     height: 25rem; // 80%
-    width: 50vw;
     border: 1px solid blue;
     margin: 0 auto;
     display: flex;
     justify-content: center;
+    min-width: 50vw;
 }
 </style>
