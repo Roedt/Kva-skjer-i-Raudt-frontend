@@ -1,8 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import HelloVue from './views/HelloVue.vue';
 import Home from './views/Home.vue';
-import ConcertMap from './views/ConcertMap.vue';
+import Map from './components/Map.vue';
 
 Vue.use(Router);
 
@@ -15,13 +14,8 @@ export default new Router({
     },
     {
       path: '/map',
-      name: 'concertmap',
-      component: ConcertMap,
-    },
-    {
-      path: '/hellovue',
-      name: 'hellovue',
-      component: HelloVue,
+      name: 'map',
+      component: Map,
     },
     {
       path: '/about',
