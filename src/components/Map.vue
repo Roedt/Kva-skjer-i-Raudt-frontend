@@ -49,8 +49,17 @@ export default Vue.extend({
     mounted() {
         this.setMapURL();
         const caller = new APICaller((e: any) => this.createMarker(e));
+        this.$nextTick(() => {
+            this.locateUser();
+        });
     },
     methods: {
+        locateUser() {
+            navigator.geolocation.getCurrentPosition(this.locateToUser);
+        },
+        locateToUser(pos: Position) {
+            (this.$refs.mapz as LMap).mapObject.setView([pos.coords.latitude, pos.coords.longitude], 11);
+        },
         setMapURL() {
             // tslint:disable-next-line:max-line-length
             this.mapURL = 'https://api.tiles.mapbox.com/v4/' + this.mapID + '/{z}/{x}/{y}.png?access_token=' + this.accessToken;
