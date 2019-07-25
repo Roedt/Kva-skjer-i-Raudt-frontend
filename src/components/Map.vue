@@ -57,10 +57,6 @@ export default class Map extends Vue {
             return;
         }
         this.events.push(event);
-/*        'color': 'blue',
-        'fillColor': '#f03',
-        'fillOpacity': 0.5,
-  */
     }
 }
 
@@ -76,6 +72,7 @@ export default class Map extends Vue {
 @media screen and (max-width: 720px) {
     div#map {
         width: 100%;
+        height: 100%;
     }
 }
 
