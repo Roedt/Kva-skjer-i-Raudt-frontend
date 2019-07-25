@@ -2,7 +2,7 @@
     <div id="map-view">
         <h1> {{ header }} </h1>
         <div id="map">
-            <l-map ref="map" :zoom="zoom" :center="center" :maxZoom="maxZoom">
+            <l-map ref="mapz" :zoom="zoom" :center="center" :maxZoom="maxZoom">
                 <l-tile-layer :url="mapURL" :id="mapID" :attribution="attribution"></l-tile-layer>
                 <Vue2LeafletMarkerCluster>
                 <LMarker v-for="event in events" v-if="event.latlng !== null" :lat-lng="event.latlng" :key="event.url+event.host">
@@ -27,38 +27,42 @@ import SingleEvent from '../types/SingleEvent.vue';
 
 Vue.component('Vue2LeafletMarkerCluster', Vue2LeafletMarkerCluster);
 
-@Component({
+export default Vue.extend({
+    name: 'Map',
     components: {
         LMap, LTileLayer, LMarker, LPopup,
     },
-})
-export default class Map extends Vue {
-    @Prop() private header!: string;
-    private zoom = 4;
-    private center = [65.1, 18.0];
-    private mapID = 'mapbox.streets';
+    data: () => ({
+     zoom: 4,
+     center:  [65.1, 18.0],
+     mapID: 'mapbox.streets',
     // tslint:disable-next-line:max-line-length
-    private attribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     // tslint:disable-next-line:max-line-length
-    private accessToken = 'pk.eyJ1IjoibWFkc29waGVpbSIsImEiOiJjanZhcnVwMHIxMW15NGVwOHp5aGFldGRuIn0.wHzNVsUQ_ty5tEkrB8vnLQ';
-    // tslint:disable-next-line:max-line-length
-    private mapURL = 'https://api.tiles.mapbox.com/v4/' + this.mapID + '/{z}/{x}/{y}.png?access_token=' + this.accessToken;
-    private mapURL2 = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
-    private maxZoom = 20;
-    private events = [] as SingleEvent[];
-
-    constructor() {
-        super();
+     accessToken: 'pk.eyJ1IjoibWFkc29waGVpbSIsImEiOiJjanZhcnVwMHIxMW15NGVwOHp5aGFldGRuIn0.wHzNVsUQ_ty5tEkrB8vnLQ',
+     mapURL: '',
+     mapURL2: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+     maxZoom: 20,
+     events: [] as SingleEvent[],
+    }),
+    props: ['header'],
+    mounted() {
+        this.setMapURL();
         const caller = new APICaller((e: any) => this.createMarker(e));
-    }
-
-    private createMarker(event: SingleEvent) {
-        if (event.latlng === undefined) {
-            return;
-        }
-        this.events.push(event);
-    }
-}
+    },
+    methods: {
+        setMapURL() {
+            // tslint:disable-next-line:max-line-length
+            this.mapURL = 'https://api.tiles.mapbox.com/v4/' + this.mapID + '/{z}/{x}/{y}.png?access_token=' + this.accessToken;
+        },
+        createMarker(event: SingleEvent) {
+            if (event.latlng === undefined) {
+                return;
+            }
+            this.events.push(event);
+        },
+    },
+});
 
 </script>
 
