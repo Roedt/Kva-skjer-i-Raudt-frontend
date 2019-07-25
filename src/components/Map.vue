@@ -80,11 +80,12 @@ export default class Map extends Vue {
 }
 
 div#map{
-    height: 25rem; // 80%
+    height: 30rem; // 80%
     border: 1px solid blue;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     min-width: 50vw;
+    min-height: 40vw;
 }
 </style>
