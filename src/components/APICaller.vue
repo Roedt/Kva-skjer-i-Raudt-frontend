@@ -43,10 +43,13 @@ export default class APICaller extends Vue {
         for (const ev of Object.values(items)) {
             this.makeAPICall(ev.mediaLink, (r: RESTResponse) => {
                 const event = r.data;
+                if (event.starttime !== undefined) {
+                    event.time = event.starttime;
+                }
                 if (event.time === undefined) {
                     return;
                 }
-                event.time = event.time.replace(' â', ' -').replace('UTC+02', '');
+                event.time = event.time.replace(' â', ' -');
                 event.time = event.time.replace(' at ', ' ').split(' - ')[0];
                 event.time = event.time.replace(' Â·', '');
                 if (event.lat !== undefined && event.lon !== undefined) {
