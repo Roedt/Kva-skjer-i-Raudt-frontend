@@ -3,11 +3,13 @@
         <img alt="Page logo" class="logo" src="../assets/nynorsklogo.png">
         <h1> {{ tittel }} </h1>
         <table id="eventsList">
-            <tr>
-                <th>Tittel</th>
-                <th>Tidspunkt</th>
-                <th>Arrangør</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th v-for="column in columns" :key="column">
+                        {{ column }}
+                    </th>
+                </tr>
+            </thead>
             <tr v-for="event in events" :key="event.url+event.host">
                 <td> <a :href=event.url>{{ event.title }}</a> </td>
                 <td> {{ event.time }} </td>
@@ -25,6 +27,7 @@ import APICaller from '../components/APICaller.vue';
 
 export default Vue.extend({
     data: () => ({
+        columns: ['Tittel', 'Tidspunkt', 'Arrangør'],
         tittel: 'Kva skjer i Raudt?' ,
         events: [] as SingleEvent[],
     }),
