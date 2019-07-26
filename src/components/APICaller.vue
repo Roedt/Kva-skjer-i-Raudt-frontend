@@ -19,6 +19,21 @@ interface RESTResponse {
     data: SingleEvent;
 }
 
+const months = new Map([
+    ['JAN', 'januar'],
+    ['FEB', 'februar'],
+    ['MAR', 'mars'],
+    ['APR', 'april'],
+    ['MAY', 'mai'],
+    ['JUN', 'juni'],
+    ['JUL', 'juli'],
+    ['AUG', 'august'],
+    ['SEP', 'september'],
+    ['OCT', 'oktober'],
+    ['NOV', 'november'],
+    ['DEC', 'desember'],
+]);
+
 export default class APICaller extends Vue {
     private tittel!: 'Kva skjer i Raudt?';
     private events!: SingleEvent[];
@@ -40,20 +55,6 @@ export default class APICaller extends Vue {
     }
 
     private replaceMonth(month: string): any {
-        const months = new Map([
-            ['JAN', 'januar'],
-            ['FEB', 'februar'],
-            ['MAR', 'mars'],
-            ['APR', 'april'],
-            ['MAY', 'mai'],
-            ['JUN', 'juni'],
-            ['JUL', 'juli'],
-            ['AUG', 'august'],
-            ['SEP', 'september'],
-            ['OCT', 'oktober'],
-            ['NOV', 'november'],
-            ['DEC', 'desember'],
-        ]);
         return months.get(month);
     }
 
