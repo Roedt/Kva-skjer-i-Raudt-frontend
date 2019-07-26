@@ -12,7 +12,7 @@
             </thead>
             <tr v-for="event in events" :key="event.url+event.host">
                 <td> <a :href=event.url>{{ event.title }}</a> </td>
-                <td> {{ event.dayOfMonth + '.' + event.month + ' kl. ' + event.timeOfDay }} </td>
+                <td> {{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }} </td>
                 <td> {{ event.host }} </td>
             </tr>
         </table>

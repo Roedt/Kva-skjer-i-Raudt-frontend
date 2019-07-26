@@ -19,7 +19,7 @@ interface RESTResponse {
     data: SingleEvent;
 }
 
-const months = new Map([
+const months = new Map<string, string>([
     ['JAN', 'januar'],
     ['FEB', 'februar'],
     ['MAR', 'mars'],
@@ -75,7 +75,7 @@ export default class APICaller extends Vue {
                 event.month = this.replaceMonth(event.month);
 
                 event.url = event.url.replace('//m.', '//www.');
-                event.popup = event.month
+                event.popup = event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay
                 + '<br/><a href='
                 + event.url + '>'
                 + event.title + '</a> (' + event.host + ')';
