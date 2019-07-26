@@ -38,24 +38,18 @@ export default Vue.extend({
     },
     computed: {
         sortedEvents(): SingleEvent[] {
-            return this.events.sort((a, b) => {
-                const monthDiff = this.apiCaller.getM(a.month) - this.apiCaller.getM(b.month);
-                if (monthDiff > 0) {
-                    return 1;
-                }
-                if (monthDiff < 0) {
-                    return -1;
-                }
-                const dayOfMonthDiff = a.dayOfMonth - b.dayOfMonth;
-                if (dayOfMonthDiff > 0) {
-                    return 1;
-                }
-                if (dayOfMonthDiff < 0) {
-                    return -1;
-                }
-
-                return 0;
-            });
+            return this.events.sort((a, b) => this.toInstant(a) - this.toInstant(b));
+        },
+    },
+    methods: {
+        toInstant(event: SingleEvent): number {
+            const hour = parseInt(event.timeOfDay.split('.')[0], 10);
+            const minutes = parseInt(event.timeOfDay.split('.')[1], 10);
+            const instant =  Date.parse(new Date().getFullYear()
+                + '-'
+                + event.month + '-'
+                + event.dayOfMonth + ' ' + hour + ':' + minutes);
+            return instant;
         },
     },
 });
