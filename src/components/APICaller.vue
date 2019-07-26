@@ -39,31 +39,44 @@ export default class APICaller extends Vue {
             .then((response: any) => callback(response));
     }
 
+    private replaceMonth(month: string): any {
+        const months = new Map([
+            ['JAN', 'januar'],
+            ['FEB', 'februar'],
+            ['MAR', 'mars'],
+            ['APR', 'april'],
+            ['MAY', 'mai'],
+            ['JUN', 'juni'],
+            ['JUL', 'juli'],
+            ['AUG', 'august'],
+            ['SEP', 'september'],
+            ['OCT', 'oktober'],
+            ['NOV', 'november'],
+            ['DEC', 'desember'],
+        ]);
+        return months.get(month);
+    }
+
     private handleResponse(items: MetaEvent[], listener: any): void {
         for (const ev of Object.values(items)) {
             this.makeAPICall(ev.mediaLink, (r: RESTResponse) => {
                 const event = r.data;
-                if (event.starttime !== undefined) {
-                    event.time = event.starttime;
-                }
-                if (event.time === undefined) {
+                if (event.url === undefined) {
                     return;
                 }
-                event.time = event.time.replace(' â', ' -');
-                event.time = event.time.replace(' at ', ' ').split(' - ')[0];
-                event.time = event.time.replace(' Â·', '');
                 if (event.lat !== undefined && event.lon !== undefined) {
                     event.latlng = [event.lat, event.lon];
                 }
-
-                if (Date.now() > Date.parse(event.time)) {
+                if (Date.now() > Date.parse(new Date().getFullYear() + '-' + event.month
+                    + '-' + event.dayOfMonth + '-23:59:59')) {
                     return;
                 }
+                event.month = this.replaceMonth(event.month);
 
                 event.url = event.url.replace('//m.', '//www.');
-                event.popup = event.time
+                event.popup = event.month
                 + '<br/><a href='
-                + event.url.replace('//m.', '//www.') + '>'
+                + event.url + '>'
                 + event.title + '</a> (' + event.host + ')';
 
                 this.events.push(event);

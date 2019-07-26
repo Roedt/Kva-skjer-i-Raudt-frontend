@@ -3,9 +3,9 @@ import { Prop, Vue } from 'vue-property-decorator';
 
 export default class SingleEvent extends Vue {
     @Prop() public title!: string;
-    @Prop() public time!: string;
-    @Prop() public starttime!: string;
-    @Prop() public endtime!: string;
+    @Prop() public month!: string;
+    @Prop() public dayOfMonth!: number;
+    @Prop() public timeOfDay!: string;
     @Prop() public host!: string;
     @Prop() public url!: string;
     @Prop() public lat!: number;
