@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/">Heim</router-link> |
       <router-link to="/map">Kart</router-link> |
-      <router-link to="/about">Om</router-link>
+      <router-link to="/about">Om</router-link> |
+      <a href="https://xn--rdt-0na.no/">Til partiet</a>
     </div>
     <router-view/>
   </div>

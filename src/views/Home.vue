@@ -1,6 +1,5 @@
 <template>
     <div class="home">
-        <img alt="Page logo" class="logo" src="../assets/nynorsklogo.png">
         <h1> {{ tittel }} </h1>
         <table id="eventsList">
             <thead>
