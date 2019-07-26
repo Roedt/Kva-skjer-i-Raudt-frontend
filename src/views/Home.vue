@@ -29,9 +29,14 @@ export default Vue.extend({
         columns: ['Tittel', 'Tidspunkt', 'Arrangør'],
         tittel: 'Kva skjer i Raudt?' ,
         events: [] as SingleEvent[],
+        apiCaller: APICaller,
     }),
     mounted() {
         const apicaller = new APICaller((e: any) => this.events.push(e));
+        this.$nextTick(() => {
+            apicaller.tick();
+        });
+    },
     },
 });
 </script>

@@ -38,14 +38,17 @@ export default class APICaller extends Vue {
     private tittel!: 'Kva skjer i Raudt?';
     private events!: SingleEvent[];
     private eventsLink!: string;
+    private listener: any;
 
     constructor(listener: any) {
         super();
         this.eventsLink = eventsLink;
         this.events = [];
-        this.$nextTick(() => {
-            this.makeAPICall(this.eventsLink, (r: any) => this.handleResponse(r.data.items, listener));
-        });
+        this.listener = listener;
+    }
+
+    public tick(): void {
+        this.makeAPICall(this.eventsLink, (r: any) => this.handleResponse(r.data.items, this.listener));
     }
 
     public makeAPICall(url: string, callback: (callback: any) => void): void {

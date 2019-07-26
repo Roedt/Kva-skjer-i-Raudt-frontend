@@ -50,6 +50,7 @@ export default Vue.extend({
         this.setMapURL();
         const caller = new APICaller((e: any) => this.createMarker(e));
         this.$nextTick(() => {
+            caller.tick();
             this.locateUser();
         });
     },
