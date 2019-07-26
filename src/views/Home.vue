@@ -9,7 +9,7 @@
                     </th>
                 </tr>
             </thead>
-            <tr v-for="event in events" :key="event.url+event.host">
+            <tr v-for="event in sortedEvents" :key="event.url+event.host">
                 <td> <a :href=event.url>{{ event.title }}</a> </td>
                 <td> {{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }} </td>
                 <td> {{ event.host }} </td>
@@ -23,20 +23,40 @@ import Vue from 'vue';
 import SingleEvent from '../types/SingleEvent.vue';
 import APICaller from '../components/APICaller.vue';
 
-
 export default Vue.extend({
     data: () => ({
         columns: ['Tittel', 'Tidspunkt', 'Arrangør'],
         tittel: 'Kva skjer i Raudt?' ,
         events: [] as SingleEvent[],
-        apiCaller: APICaller,
+        apiCaller: APICaller.prototype,
     }),
     mounted() {
-        const apicaller = new APICaller((e: any) => this.events.push(e));
+        this.apiCaller = new APICaller((e: any) => this.events.push(e));
         this.$nextTick(() => {
-            apicaller.tick();
+            this.apiCaller.tick();
         });
     },
+    computed: {
+        sortedEvents(): SingleEvent[] {
+            return this.events.sort((a, b) => {
+                const monthDiff = this.apiCaller.getM(a.month) - this.apiCaller.getM(b.month);
+                if (monthDiff > 0) {
+                    return 1;
+                }
+                if (monthDiff < 0) {
+                    return -1;
+                }
+                const dayOfMonthDiff = a.dayOfMonth - b.dayOfMonth;
+                if (dayOfMonthDiff > 0) {
+                    return 1;
+                }
+                if (dayOfMonthDiff < 0) {
+                    return -1;
+                }
+
+                return 0;
+            });
+        },
     },
 });
 </script>

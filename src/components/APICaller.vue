@@ -19,7 +19,7 @@ interface RESTResponse {
     data: SingleEvent;
 }
 
-const months = new Map<string, string>([
+const months = [
     ['JAN', 'januar'],
     ['FEB', 'februar'],
     ['MAR', 'mars'],
@@ -32,7 +32,7 @@ const months = new Map<string, string>([
     ['OCT', 'oktober'],
     ['NOV', 'november'],
     ['DEC', 'desember'],
-]);
+];
 
 export default class APICaller extends Vue {
     private tittel!: 'Kva skjer i Raudt?';
@@ -57,8 +57,16 @@ export default class APICaller extends Vue {
             .then((response: any) => callback(response));
     }
 
+    public getM(month: string): any {
+        return months.findIndex((m) => m[1] === month);
+    }
+
     private replaceMonth(month: string): any {
-        return months.get(month);
+        const monthObject = months.find((m) => m[0] === month);
+        if (monthObject === undefined) {
+            return month;
+        }
+        return monthObject[1];
     }
 
     private handleResponse(items: MetaEvent[], listener: any): void {
