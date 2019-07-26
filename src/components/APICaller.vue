@@ -57,10 +57,6 @@ export default class APICaller extends Vue {
             .then((response: any) => callback(response));
     }
 
-    public getM(month: string): any {
-        return months.findIndex((m) => m[1] === month);
-    }
-
     private replaceMonth(month: string): any {
         const monthObject = months.find((m) => m[0] === month);
         if (monthObject === undefined) {
