@@ -56,6 +56,10 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 
+h1 {
+    margin: 2px;
+}
+
 table {
     margin: 0 auto;
     text-align: left;
