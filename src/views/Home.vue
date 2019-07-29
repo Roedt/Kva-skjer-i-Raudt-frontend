@@ -10,9 +10,9 @@
                 </tr>
             </thead>
             <tr v-for="event in sortedEvents" :key="event.url+event.host">
+                <td> {{ event.host }} </td>
                 <td> <a :href=event.url>{{ event.title }}</a> </td>
                 <td> {{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }} </td>
-                <td> {{ event.host }} </td>
             </tr>
         </table>
     </div>
@@ -25,7 +25,7 @@ import APICaller from '../components/APICaller.vue';
 
 export default Vue.extend({
     data: () => ({
-        columns: ['Tittel', 'Tidspunkt', 'Arrangør'],
+        columns: ['Arrangør', 'Tittel', 'Tidspunkt'],
         tittel: 'Kva skjer i Raudt?' ,
         events: [] as SingleEvent[],
         apiCaller: APICaller.prototype,
