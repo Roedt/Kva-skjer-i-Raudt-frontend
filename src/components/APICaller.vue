@@ -84,7 +84,7 @@ export default class APICaller extends Vue {
                 event.url = event.url.replace('//m.', '//www.');
                 event.popup = event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay
                 + '<br/><a href='
-                + event.url + '>'
+                + event.url + ' target="_blank" >'
                 + event.title + '</a> (' + event.host + ')';
 
                 this.events.push(event);

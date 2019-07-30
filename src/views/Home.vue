@@ -11,7 +11,7 @@
             </thead>
             <tr v-for="event in sortedEvents" :key="event.url+event.host">
                 <td> {{ event.host }} </td>
-                <td> <a :href=event.url>{{ event.title }}</a> </td>
+                <td> <a :href=event.url target="_blank">{{ event.title }}</a> </td>
                 <td> {{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }} </td>
             </tr>
         </table>
