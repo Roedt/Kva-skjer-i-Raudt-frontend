@@ -76,7 +76,7 @@ export default Vue.extend({
 
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 
 @import "~leaflet/dist/leaflet.css";
 @import "~leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";

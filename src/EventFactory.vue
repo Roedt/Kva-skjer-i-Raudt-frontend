@@ -23,7 +23,7 @@ export default class EventFactory extends Vue {
         this.convertToEvent(response, callback);
     }
 
-    private replaceMonth(month: string): any {
+    private replaceMonth(month: string): string {
         const monthObject = months.find((m) => m[0] === month);
         if (monthObject === undefined) {
             return month;
@@ -36,8 +36,12 @@ export default class EventFactory extends Vue {
                     + '-' + event.dayOfMonth + '-23:59:59');
     }
 
+    private formatTime(event: SingleEvent): string {
+        return event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay;
+    }
+
     private createEventPopup(event: SingleEvent): string {
-        return event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay
+        return this.formatTime(event)
                 + '<br/><a href='
                 + event.url + ' target="_blank" >'
                 + event.title + '</a> (' + event.host + ')';

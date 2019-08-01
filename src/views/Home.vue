@@ -1,7 +1,8 @@
 <template>
     <div class="home">
         <h1> {{ tittel }} </h1>
-        <table id="eventsList">
+        <table id="eventsList"> 
+            <!--TODO: denne tabellen er visst ikkje heilt fin på mobil. litt mediaqueries? -->
             <!--TODO: Lag eigen component av table-header? -->
             <thead>
                 <tr>
@@ -68,6 +69,7 @@ table {
     text-align: left;
 }
 
+// TODO: Er det screen også på mobil?
 td, th {
     @media screen and (max-width: 700px) {
         padding: 0.2rem 0.5rem;
