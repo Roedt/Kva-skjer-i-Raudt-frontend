@@ -2,6 +2,7 @@
     <div class="home">
         <h1> {{ tittel }} </h1>
         <table id="eventsList">
+            <!--TODO: Lag eigen component av table-header? -->
             <thead>
                 <tr>
                     <th v-for="column in columns" :key="column">
@@ -9,6 +10,7 @@
                     </th>
                 </tr>
             </thead>
+        <!--TODO: Trekk ut TR-koden under til eigen component -->
             <tr v-for="event in sortedEvents" :key="event.url+event.host">
                 <td> {{ event.host }} </td>
                 <td> <a :href=event.url target="_blank">{{ event.title }}</a> </td>
@@ -43,6 +45,7 @@ export default Vue.extend({
     },
     methods: {
         toInstant(event: SingleEvent): number {
+            // TODO: dette burde ligge i event-klassa
             const hour = parseInt(event.timeOfDay.split('.')[0], 10);
             const minutes = parseInt(event.timeOfDay.split('.')[1], 10);
             const instant =  Date.parse(new Date().getFullYear()
