@@ -65,31 +65,45 @@ export default class APICaller extends Vue {
         return monthObject[1];
     }
 
-    private handleResponse(items: MetaEvent[], listener: any): void {
-        for (const ev of Object.values(items)) {
-            this.makeAPICall(ev.mediaLink, (r: RESTResponse) => {
-                const event = r.data;
-                if (event.url === undefined) {
-                    return;
-                }
-                if (event.lat !== undefined && event.lon !== undefined) {
-                    event.latlng = [event.lat, event.lon];
-                }
-                if (Date.now() > Date.parse(new Date().getFullYear() + '-' + event.month
-                    + '-' + event.dayOfMonth + '-23:59:59')) {
-                    return;
-                }
-                event.month = this.replaceMonth(event.month);
+    private dateHasPassed(event: SingleEvent): boolean {
+        return Date.now() > Date.parse(new Date().getFullYear() + '-' + event.month
+                    + '-' + event.dayOfMonth + '-23:59:59');
+    }
 
-                event.url = event.url.replace('//m.', '//www.');
-                event.popup = event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay
+    private createEventPopup(event: SingleEvent): string {
+        return event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay
                 + '<br/><a href='
                 + event.url + ' target="_blank" >'
                 + event.title + '</a> (' + event.host + ')';
+    }
 
-                this.events.push(event);
-                listener(event);
-            },
+    private convertToEvent(response: RESTResponse, callback: any): void {
+        const event = response.data;
+        if (event.url === undefined) {
+            return;
+        }
+        if (event.lat !== undefined && event.lon !== undefined) {
+            event.latlng = [event.lat, event.lon];
+        }
+        if (this.dateHasPassed(event)) {
+            return;
+        }
+        event.month = this.replaceMonth(event.month);
+
+        event.url = event.url.replace('//m.', '//www.');
+        event.popup = this.createEventPopup(event);
+
+        callback(event);
+    }
+
+    private handleResponse(items: MetaEvent[], listener: any): void {
+        for (const ev of Object.values(items)) {
+                this.makeAPICall(ev.mediaLink, (r: RESTResponse) => {
+                    this.convertToEvent(r, (event: SingleEvent) => {
+                        this.events.push(event);
+                        listener(event);
+                    });
+                },
             );
         }
     }
