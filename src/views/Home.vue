@@ -77,7 +77,6 @@ td, th {
         padding: 0.2rem 0.1rem;
         margin: 0.1rem;
         word-break: break-word;
-        max-width: 100px;
     }
     @media screen and (min-width: $mobile-max) {
         padding: 0.2rem 1.5rem;
