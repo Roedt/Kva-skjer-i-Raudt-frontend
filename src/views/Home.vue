@@ -69,12 +69,17 @@ table {
     text-align: left;
 }
 
+$mobile-max: 700px;
+
 // TODO: Er det screen også på mobil?
 td, th {
-    @media screen and (max-width: 700px) {
-        padding: 0.2rem 0.5rem;
+    @media screen and (max-width: $mobile-max) {
+        padding: 0.2rem 0.1rem;
+        margin: 0.1rem;
+        word-break: break-word;
+        max-width: 100px;
     }
-    @media screen and (min-width: 700px) {
+    @media screen and (min-width: $mobile-max) {
         padding: 0.2rem 1.5rem;
     }
 }
