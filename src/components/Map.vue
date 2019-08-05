@@ -91,7 +91,7 @@ export default Vue.extend({
 }
 
 div#map{
-    height: 30rem; // 80%
+    height: 38rem;
     border: 1px solid blue;
     margin: 0 auto;
     display: flex;

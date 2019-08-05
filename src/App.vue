@@ -1,10 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Heim</router-link> |
-      <router-link to="/map">Kart</router-link> |
-      <router-link to="/about">Om</router-link> |
-      <a href="https://xn--rdt-0na.no/">Til partiet</a>
+      <router-link to="/">Liste</router-link> |
+      <router-link to="/map">Kart</router-link> 
     </div>
     <router-view/>
   </div>
