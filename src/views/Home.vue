@@ -1,6 +1,5 @@
 <template>
     <div class="home">
-        <h1> {{ tittel }} </h1>
         <table id="eventsList"> 
             <!--TODO: denne tabellen er visst ikkje heilt fin på mobil. litt mediaqueries? -->
             <!--TODO: Lag eigen component av table-header? -->
