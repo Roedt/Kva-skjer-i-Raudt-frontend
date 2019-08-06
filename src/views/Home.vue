@@ -1,23 +1,28 @@
 <template>
     <div class="home">
-        <h1> {{ tittel }} </h1>
-        <table id="eventsList"> 
-            <!--TODO: denne tabellen er visst ikkje heilt fin på mobil. litt mediaqueries? -->
-            <!--TODO: Lag eigen component av table-header? -->
-            <thead>
-                <tr>
-                    <th v-for="column in columns" :key="column">
-                        {{ column }}
-                    </th>
-                </tr>
-            </thead>
-        <!--TODO: Trekk ut TR-koden under til eigen component -->
-            <tr v-for="event in sortedEvents" :key="event.url+event.host">
-                <td> {{ event.host }} </td>
-                <td> <a :href=event.url target="_blank">{{ event.title }}</a> </td>
-                <td> {{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }} </td>
-            </tr>
-        </table>
+
+    <v-container
+      fluid
+      grid-list-md
+      pa-2
+    >
+        <v-layout column>
+            <v-flex v-for="event in sortedEvents" :key="event.url+event.host">
+                <v-card class="mx-auto" width="100%"
+            >
+                    <v-card-title
+                class="fill-height align-end"
+                style="word-break: break-word"
+                v-text="event.title"></v-card-title>
+                    <v-card-text>{{ event.host }}<br />{{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }}</v-card-text>
+                    <v-card-actions style="word-break: break-word">
+                        <v-btn text style="word-break: break-word"><a :href=event.url target="_blank">Til hendinga</a></v-btn>
+                        <v-spacer></v-spacer>
+                    </v-card-actions>
+                </v-card>
+            </v-flex>
+        </v-layout>
+    </v-container>
     </div>
 </template>
 
