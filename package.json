@@ -17,15 +17,19 @@
     "leaflet": "^1.5.1",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet.markercluster": "^1.4.1",
+    "material-design-icons-iconfont": "^5.0.1",
+    "strip-ansi": "^5.2.0",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
     "vue-router": "^3.0.3",
     "vue2-leaflet": "^2.1.1",
-    "vue2-leaflet-markercluster": "^3.0.0"
+    "vue2-leaflet-markercluster": "^3.0.0",
+    "vuetify": "^2.0.0"
   },
   "devDependencies": {
+    "@mdi/font": "^3.8.95",
     "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.9.0",
     "@vue/cli-plugin-e2e-cypress": "^3.9.0",
@@ -34,11 +38,15 @@
     "@vue/cli-service": "^3.9.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
+    "deepmerge": "^4.0.0",
+    "fibers": "^4.0.1",
     "install-peers": "^1.0.3",
-    "sass": "^1.18.0",
+    "sass": "^1.22.9",
     "sass-loader": "^7.1.0",
     "ts-jest": "^23.0.0",
     "typescript": "^3.4.3",
-    "vue-template-compiler": "^2.6.10"
+    "vue-cli-plugin-vuetify": "^0.6.1",
+    "vue-template-compiler": "^2.6.10",
+    "vuetify-loader": "^1.2.2"
   }
 }

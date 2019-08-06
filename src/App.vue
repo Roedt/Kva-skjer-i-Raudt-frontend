@@ -1,11 +1,14 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Liste</router-link> |
-      <router-link to="/map">Kart</router-link> 
-    </div>
-    <router-view/>
-  </div>
+    <v-app id="app">
+      <v-content>
+        <div id="nav">
+          <router-link to="/">Liste</router-link> |
+          <router-link to="/map">Kart</router-link>
+        </div>
+        <router-view/>
+      </v-content>
+    </v-app>
+  </v-app>
 </template>
 
 <style lang="scss" scoped>
