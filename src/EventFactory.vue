@@ -31,11 +31,6 @@ export default class EventFactory extends Vue {
         return monthObject[1];
     }
 
-    private dateHasPassed(event: SingleEvent): boolean {
-        return Date.now() > Date.parse(new Date().getFullYear() + '-' + event.month
-                    + '-' + event.dayOfMonth + '-23:59:59');
-    }
-
     private formatTime(event: SingleEvent): string {
         return event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay;
     }
@@ -54,9 +49,6 @@ export default class EventFactory extends Vue {
         }
         if (event.lat !== undefined && event.lon !== undefined) {
             event.latlng = [event.lat, event.lon];
-        }
-        if (this.dateHasPassed(event)) {
-            return;
         }
         event.month = this.replaceMonth(event.month);
 
