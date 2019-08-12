@@ -11,7 +11,7 @@
                 </tr>
             </thead>
         <!--TODO: Trekk ut TR-koden under til eigen component -->
-            <tr v-for="event in sortedEvents" :key="event.url+event.host">
+            <tr v-for="event in events" :key="event.url+event.host">
                 <td> {{ event.host }} </td>
                 <td> <a :href=event.url target="_blank">{{ event.title }}</a> </td>
                 <td> {{ event.formattedTime }} </td>
@@ -30,27 +30,11 @@ export default Vue.extend({
         columns: ['Arrangør', 'Tittel', 'Tidspunkt'],
         tittel: 'Kva skjer i Raudt?' ,
         events: [] as SingleEvent[],
-        apiCaller: APICaller.prototype,
-        numberOfEvents: 0,
     }),
     mounted() {
-        this.apiCaller = new APICaller((e: any) => this.events.push(e));
         this.$nextTick(() => {
-            this.apiCaller.tick((x: any) => this.numberOfEvents = x);
+            new APICaller().tick((events: SingleEvent[]) => this.events = events);
         });
-    },
-    computed: {
-        sortedEvents(): SingleEvent[] {
-            if (this.numberOfEvents === this.events.length) {
-                return this.events.sort((a, b) => this.sort(a, b));
-            }
-            return [];
-        },
-    },
-    methods: {
-        sort(a: SingleEvent, b: SingleEvent): number {
-            return a.preciseTime - b.preciseTime;
-        },
     },
 });
 </script>

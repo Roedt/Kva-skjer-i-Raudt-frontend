@@ -17,9 +17,8 @@ export default class APICaller extends Vue {
     private tittel!: 'Kva skjer i Raudt?';
     private events!: SingleEvent[];
     private eventsLink!: string;
-    private listener: any;
 
-    constructor(listener: any) {
+    constructor() {
         super();
         const timeWhenSureAllAreFetchedForToday = moment('02:15:00', 'HH:mm:ss');
         // tslint:disable-next-line:max-line-length
@@ -27,34 +26,21 @@ export default class APICaller extends Vue {
         // tslint:disable-next-line:max-line-length
         this.eventsLink = 'https://www.googleapis.com/storage/v1/b/fb-events2/o?prefix=events/v2/' + dayToFetchFrom.format('YYYYMMDD') + '&fbclid=IwAR13SDH31uFm3hBeiR7i9pjF3ePV3VUB1qw1X5btoG03YKLIZWkwqnbzq34';
         this.events = [];
-        this.listener = listener;
     }
 
-    public tick(counterCallback: any): void {
-        this.makeAPICall(
-            this.eventsLink,
-            (r: any) => this.handleResponse(r.data.items, counterCallback, this.listener),
-        );
+    public tick(listener: any): void {
+            Vue.axios.get(this.eventsLink).then(
+                (response: any) => this.handleResponse(response.data.items, listener));
     }
 
-    public makeAPICall(url: string, callback: (callback: any) => void): void {
-            Vue.axios
-            .get(url)
-            .then((response: any) => callback(response));
-    }
-
-    private handleResponse(items: MetaEvent[], counterCallback: any, listener: any): void {
-        const events = Object.values(items);
-        counterCallback(events.length);
-        for (const ev of events) {
-                this.makeAPICall(ev.mediaLink, (r: RESTResponse) => {
-                    new EventFactory().createEvent(r, (event: SingleEvent) => {
-                        this.events.push(event);
-                        listener(event);
-                    });
-                },
-            );
+    private handleResponse(items: MetaEvent[], listener: any): void {
+        const promises = [] as Array<Promise<any>>;
+        for (const ev of Object.values(items)) {
+            promises.push(Vue.axios.get(ev.mediaLink));
         }
+        Promise.all(promises).then((values) => {
+            listener(EventFactory.toEvents(values));
+        });
     }
 }
 </script>
