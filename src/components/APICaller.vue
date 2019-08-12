@@ -30,8 +30,11 @@ export default class APICaller extends Vue {
         this.listener = listener;
     }
 
-    public tick(): void {
-        this.makeAPICall(this.eventsLink, (r: any) => this.handleResponse(r.data.items, this.listener));
+    public tick(counterCallback: any): void {
+        this.makeAPICall(
+            this.eventsLink,
+            (r: any) => this.handleResponse(r.data.items, counterCallback, this.listener),
+        );
     }
 
     public makeAPICall(url: string, callback: (callback: any) => void): void {
@@ -40,8 +43,10 @@ export default class APICaller extends Vue {
             .then((response: any) => callback(response));
     }
 
-    private handleResponse(items: MetaEvent[], listener: any): void {
-        for (const ev of Object.values(items)) {
+    private handleResponse(items: MetaEvent[], counterCallback: any, listener: any): void {
+        const events = Object.values(items);
+        counterCallback(events.length);
+        for (const ev of events) {
                 this.makeAPICall(ev.mediaLink, (r: RESTResponse) => {
                     new EventFactory().createEvent(r, (event: SingleEvent) => {
                         this.events.push(event);

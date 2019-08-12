@@ -31,19 +31,26 @@ export default Vue.extend({
         tittel: 'Kva skjer i Raudt?' ,
         events: [] as SingleEvent[],
         apiCaller: APICaller.prototype,
+        numberOfEvents: 0,
     }),
     mounted() {
         this.apiCaller = new APICaller((e: any) => this.events.push(e));
         this.$nextTick(() => {
-            this.apiCaller.tick();
+            this.apiCaller.tick((x: any) => this.numberOfEvents = x);
         });
     },
     computed: {
         sortedEvents(): SingleEvent[] {
-            return this.events.sort((a, b) => this.toInstant(a) - this.toInstant(b));
+            if (this.numberOfEvents === this.events.length) {
+                return this.events.sort((a, b) => this.sort(a, b));
+            }
+            return [];
         },
     },
     methods: {
+        sort(a: SingleEvent, b: SingleEvent): number {
+            return this.toInstant(a) - this.toInstant(b);
+        },
         toInstant(event: SingleEvent): number {
             // TODO: dette burde ligge i event-klassa
             const hour = parseInt(event.timeOfDay.split('.')[0], 10);
