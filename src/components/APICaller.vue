@@ -25,7 +25,7 @@ export default class APICaller extends Vue {
         // tslint:disable-next-line:max-line-length
         const dayToFetchFrom = moment().isAfter(timeWhenSureAllAreFetchedForToday) ? moment() : moment().subtract(1, 'days');
         // tslint:disable-next-line:max-line-length
-        this.eventsLink = 'https://www.googleapis.com/storage/v1/b/fb-events2/o?prefix=events/' + dayToFetchFrom.format('YYYYMMDD') + '&fbclid=IwAR13SDH31uFm3hBeiR7i9pjF3ePV3VUB1qw1X5btoG03YKLIZWkwqnbzq34';
+        this.eventsLink = 'https://www.googleapis.com/storage/v1/b/fb-events2/o?prefix=events/v2/' + dayToFetchFrom.format('YYYYMMDD') + '&fbclid=IwAR13SDH31uFm3hBeiR7i9pjF3ePV3VUB1qw1X5btoG03YKLIZWkwqnbzq34';
         this.events = [];
         this.listener = listener;
     }

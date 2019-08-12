@@ -14,7 +14,7 @@
             <tr v-for="event in sortedEvents" :key="event.url+event.host">
                 <td> {{ event.host }} </td>
                 <td> <a :href=event.url target="_blank">{{ event.title }}</a> </td>
-                <td> {{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }} </td>
+                <td> {{ event.formattedTime }} </td>
             </tr>
         </table>
     </div>
@@ -49,17 +49,7 @@ export default Vue.extend({
     },
     methods: {
         sort(a: SingleEvent, b: SingleEvent): number {
-            return this.toInstant(a) - this.toInstant(b);
-        },
-        toInstant(event: SingleEvent): number {
-            // TODO: dette burde ligge i event-klassa
-            const hour = parseInt(event.timeOfDay.split('.')[0], 10);
-            const minutes = parseInt(event.timeOfDay.split('.')[1], 10);
-            const instant =  Date.parse(new Date().getFullYear()
-                + '-'
-                + event.month + '-'
-                + event.dayOfMonth + ' ' + hour + ':' + minutes);
-            return instant;
+            return a.preciseTime - b.preciseTime;
         },
     },
 });

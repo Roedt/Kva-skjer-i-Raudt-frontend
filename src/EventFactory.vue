@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import SingleEvent from './types/SingleEvent.vue';
 import RESTResponse from '@/types/RESTResponse.ts';
+import moment from 'moment';
 
 const months = [
     ['JAN', 'januar'],
@@ -32,7 +33,7 @@ export default class EventFactory extends Vue {
     }
 
     private formatTime(event: SingleEvent): string {
-        return event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay;
+        return moment(event.preciseTime, 'YYYYMMDDHHmm').format('DD. [' + event.month + ' kl.] HH.mm');
     }
 
     private createEventPopup(event: SingleEvent): string {
@@ -54,6 +55,7 @@ export default class EventFactory extends Vue {
 
         event.url = event.url.replace('//m.', '//www.');
         event.popup = this.createEventPopup(event);
+        event.formattedTime = moment(event.preciseTime, 'YYYYMMDDHHmm').format('DD. [' + event.month + ' kl.] HH.mm');
 
         callback(event);
     }
