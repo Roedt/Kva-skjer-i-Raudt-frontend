@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import SingleEvent from './types/SingleEvent.vue';
 import RESTResponse from '@/types/RESTResponse.ts';
+import moment from 'moment';
 
 const months = [
     ['JAN', 'januar'],
@@ -19,8 +20,18 @@ const months = [
 ];
 
 export default class EventFactory extends Vue {
-    public createEvent(response: RESTResponse, callback: any): void {
-        this.convertToEvent(response, callback);
+
+    public static toEvents(values: any[]): SingleEvent[] {
+        const events = [] as SingleEvent[];
+        const eventFactory = new EventFactory();
+        values.forEach((ev: any) => {
+            events.push(eventFactory.createEvent(ev));
+        });
+        return events;
+    }
+
+    public createEvent(response: RESTResponse): any {
+        return this.convertToEvent(response);
     }
 
     private replaceMonth(month: string): string {
@@ -32,7 +43,7 @@ export default class EventFactory extends Vue {
     }
 
     private formatTime(event: SingleEvent): string {
-        return event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay;
+        return moment(event.preciseTime, 'YYYYMMDDHHmm').format('DD. [' + event.month + ' kl.] HH.mm');
     }
 
     private createEventPopup(event: SingleEvent): string {
@@ -42,10 +53,10 @@ export default class EventFactory extends Vue {
                 + event.title + '</a> (' + event.host + ')';
     }
 
-    private convertToEvent(response: RESTResponse, callback: any): void {
+    private convertToEvent(response: RESTResponse): any {
         const event = (response.data as SingleEvent);
         if (event.url === undefined) {
-            return;
+            return null;
         }
         if (event.lat !== undefined && event.lon !== undefined) {
             event.latlng = [event.lat, event.lon];
@@ -54,8 +65,8 @@ export default class EventFactory extends Vue {
 
         event.url = event.url.replace('//m.', '//www.');
         event.popup = this.createEventPopup(event);
-
-        callback(event);
+        event.formattedTime = moment(event.preciseTime, 'YYYYMMDDHHmm').format('DD. [' + event.month + ' kl.] HH.mm');
+        return event;
     }
 
 }

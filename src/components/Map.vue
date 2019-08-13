@@ -48,9 +48,9 @@ export default Vue.extend({
     props: ['header'],
     mounted() {
         this.setMapURL();
-        const caller = new APICaller((e: any) => this.createMarker(e));
+        const caller = new APICaller();
         this.$nextTick(() => {
-            caller.tick();
+            caller.tick((e: SingleEvent[]) => this.createMarkers(e));
             this.locateUser();
         });
     },
@@ -64,6 +64,9 @@ export default Vue.extend({
         setMapURL() {
             // tslint:disable-next-line:max-line-length
             this.mapURL = 'https://api.tiles.mapbox.com/v4/' + this.mapID + '/{z}/{x}/{y}.png?access_token=' + this.accessToken;
+        },
+        createMarkers(events: SingleEvent[]) {
+            events.forEach((event: SingleEvent) => this.createMarker(event));
         },
         createMarker(event: SingleEvent) {
             if (event.latlng === undefined) {

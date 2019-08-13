@@ -11,10 +11,10 @@
                 </tr>
             </thead>
         <!--TODO: Trekk ut TR-koden under til eigen component -->
-            <tr v-for="event in sortedEvents" :key="event.url+event.host">
+            <tr v-for="event in events" :key="event.url+event.host">
                 <td> {{ event.host }} </td>
                 <td> <a :href=event.url target="_blank">{{ event.title }}</a> </td>
-                <td> {{ event.dayOfMonth + '. ' + event.month + ' kl. ' + event.timeOfDay }} </td>
+                <td> {{ event.formattedTime }} </td>
             </tr>
         </table>
     </div>
@@ -30,30 +30,11 @@ export default Vue.extend({
         columns: ['Arrangør', 'Tittel', 'Tidspunkt'],
         tittel: 'Kva skjer i Raudt?' ,
         events: [] as SingleEvent[],
-        apiCaller: APICaller.prototype,
     }),
     mounted() {
-        this.apiCaller = new APICaller((e: any) => this.events.push(e));
         this.$nextTick(() => {
-            this.apiCaller.tick();
+            new APICaller().tick((events: SingleEvent[]) => this.events = events);
         });
-    },
-    computed: {
-        sortedEvents(): SingleEvent[] {
-            return this.events.sort((a, b) => this.toInstant(a) - this.toInstant(b));
-        },
-    },
-    methods: {
-        toInstant(event: SingleEvent): number {
-            // TODO: dette burde ligge i event-klassa
-            const hour = parseInt(event.timeOfDay.split('.')[0], 10);
-            const minutes = parseInt(event.timeOfDay.split('.')[1], 10);
-            const instant =  Date.parse(new Date().getFullYear()
-                + '-'
-                + event.month + '-'
-                + event.dayOfMonth + ' ' + hour + ':' + minutes);
-            return instant;
-        },
     },
 });
 </script>
