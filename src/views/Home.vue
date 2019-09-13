@@ -1,22 +1,10 @@
 <template>
-    <div class="home">
-        <table id="eventsList"> 
-            <!--TODO: denne tabellen er visst ikkje heilt fin på mobil. litt mediaqueries? -->
-            <!--TODO: Lag eigen component av table-header? -->
-            <thead>
-                <tr>
-                    <th v-for="column in columns" :key="column">
-                        {{ column }}
-                    </th>
-                </tr>
-            </thead>
-        <!--TODO: Trekk ut TR-koden under til eigen component -->
-            <tr v-for="event in events" :key="event.url+event.host">
-                <td> {{ event.host }} </td>
-                <td> <a :href=event.url target="_blank">{{ event.title }}</a> </td>
-                <td> {{ event.formattedTime }} </td>
-            </tr>
-        </table>
+    <div>
+        <grid-container v-for="event in events" :key="event.url+event.host" class="singleEvent">
+            <grid-item id="host">{{ event.host }}</grid-item>
+            <grid-item id="link"><a :href=event.url target="_blank">{{ event.title }}</a></grid-item>
+            <grid-item id="when">{{ event.formattedTime }}</grid-item>
+        </grid-container>
     </div>
 </template>
 
@@ -40,18 +28,20 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 
-h1 {
-    margin: 2px;
+grid-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-gap: 10px;
 }
 
-table {
-    margin: 0 auto;
-    text-align: left;
+grid-item {
+  display: flex;
+  justify-content: left;
 }
 
 $mobile-max: 700px;
 
-td, th {
+grid-item {
     @media screen and (max-width: $mobile-max) {
         padding: 0.2rem 0.1rem;
         margin: 0.3rem 0.1rem;
