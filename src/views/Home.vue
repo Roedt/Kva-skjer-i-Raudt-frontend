@@ -31,25 +31,20 @@ export default Vue.extend({
 grid-container {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
-  grid-gap: 10px;
 }
 
 grid-item {
   display: flex;
   justify-content: left;
-}
-
-$mobile-max: 700px;
-
-grid-item {
-    @media screen and (max-width: $mobile-max) {
-        padding: 0.2rem 0.1rem;
-        margin: 0.3rem 0.1rem;
-        word-break: break-word;
-    }
-    @media screen and (min-width: $mobile-max) {
-        padding: 0.2rem 1.5rem;
-    }
+  $mobile-max: 700px;
+  @media screen and (max-width: $mobile-max) {
+      padding: 0.2rem 0.1rem;
+      margin: 0.3rem 0.1rem;
+      word-break: break-word;
+  }
+  @media screen and (min-width: $mobile-max) {
+      padding: 0.2rem 1.5rem;
+  }
 }
 
 img {
