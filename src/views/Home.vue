@@ -37,6 +37,7 @@ grid-item {
   display: flex;
   justify-content: left;
   $mobile-max: 700px;
+  text-align: left;
   @media screen and (max-width: $mobile-max) {
       padding: 0.2rem 0.1rem;
       margin: 0.3rem 0.1rem;
