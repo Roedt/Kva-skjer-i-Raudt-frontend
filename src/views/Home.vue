@@ -1,10 +1,10 @@
 <template>
     <div>
-        <grid-container v-for="event in events" :key="event.url+event.host" class="singleEvent">
-            <grid-item id="host">{{ event.host }}</grid-item>
-            <grid-item id="link"><a :href=event.url target="_blank">{{ event.title }}</a></grid-item>
-            <grid-item id="when">{{ event.formattedTime }}</grid-item>
-        </grid-container>
+        <div v-for="event in events" :key="event.url+event.host" class="singleEvent">
+            <div id="host">{{ event.host }}</div>
+            <div id="link"><a :href=event.url target="_blank">{{ event.title }}</a></div>
+            <div id="when">{{ event.formattedTime }}</div>
+        </div>
     </div>
 </template>
 
@@ -28,12 +28,13 @@ export default Vue.extend({
 </script>
 <style lang="scss" scoped>
 
-grid-container {
+div.singleEvent {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
+  margin: 0.3em 0;
 }
 
-grid-item {
+.singleEvent div {
   display: flex;
   justify-content: left;
   $mobile-max: 700px;
