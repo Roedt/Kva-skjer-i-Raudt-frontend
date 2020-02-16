@@ -62,6 +62,8 @@ export default class EventFactory extends Vue {
             event.latlng = [event.lat, event.lon];
         }
         event.month = this.replaceMonth(event.month);
+        event.title = event.title.replace(/&amp;/g, 'og');
+        event.title = event.title.replace(/&quot;/g, '"');
 
         event.url = event.url.replace('//m.', '//www.');
         event.popup = this.createEventPopup(event);
