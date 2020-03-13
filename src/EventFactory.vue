@@ -27,6 +27,7 @@ export default class EventFactory extends Vue {
         values.forEach((ev: any) => {
             events.push(eventFactory.createEvent(ev));
         });
+        values.sort((a, b) => a.title - b.title);
         return events;
     }
 
