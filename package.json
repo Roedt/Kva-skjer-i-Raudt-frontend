@@ -32,7 +32,7 @@
     "install-peers": "^1.0.3",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.2",
-    "typescript": "^3.9.5",
+    "typescript": "^3.9.6",
     "vue-template-compiler": "^2.6.11"
   }
 }
