@@ -31,7 +31,7 @@
     "babel-core": "7.0.0-bridge.0",
     "install-peers": "^1.0.3",
     "sass": "^1.26.8",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^9.0.0",
     "typescript": "^3.9.5",
     "vue-template-compiler": "^2.6.11"
   }
