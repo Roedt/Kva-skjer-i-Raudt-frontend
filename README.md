@@ -4,4 +4,6 @@ Finn hendingar som skjer i Raudt, lokalt som sentralt, og plasserer dei på eit 
 
 Er per no i bruk på https://roedt.no/hva-skjer-i-rodt
 
-Denne frontenden passar med backenden frå https://github.com/Roedt/fbevents-scraper
+Som er ei iframe rundt https://ecstatic-perlman-c2e3d9.netlify.app/ - som automatisk blir bygd og deploya ved push til main.
+
+Denne frontenden passar med backenden frå https://github.com/Roedt/Kva-skjer-i-Raudt-backend
