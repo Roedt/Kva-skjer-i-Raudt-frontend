@@ -10,7 +10,7 @@
   "dependencies": {
     "@types/leaflet": "^1.5.19",
     "@types/leaflet-markercluster": "^1.0.3",
-    "axios": "^0.20.0",
+    "axios": "^0.21.0",
     "core-js": "^3.6.5",
     "leaflet": "^1.7.1",
     "leaflet-defaulticon-compatibility": "^0.1.1",
