@@ -18,7 +18,7 @@
     "moment": "^2.29.1",
     "serialize-javascript": "^5.0.1",
     "vue": "^2.6.12",
-    "vue-axios": "^3.2.1",
+    "vue-axios": "^3.2.2",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.4.9",
