@@ -58,7 +58,7 @@ export default Vue.extend({
         locateUser() {
             navigator.geolocation.getCurrentPosition(this.locateToUser);
         },
-        locateToUser(pos: any) {
+        locateToUser(pos: GeolocationPosition) {
             (this.$refs.mapz as LMap).mapObject.setView([pos.coords.latitude, pos.coords.longitude], 11);
         },
         setMapURL() {
