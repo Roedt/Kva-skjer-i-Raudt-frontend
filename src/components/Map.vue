@@ -35,7 +35,7 @@ export default Vue.extend({
     data: () => ({
      zoom: 4,
      center:  [65.1, 18.0],
-     mapID: 'mapbox.streets',
+     mapID: 'mapbox/streets-v11',
     // tslint:disable-next-line:max-line-length
      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     // tslint:disable-next-line:max-line-length
@@ -58,12 +58,12 @@ export default Vue.extend({
         locateUser() {
             navigator.geolocation.getCurrentPosition(this.locateToUser);
         },
-        locateToUser(pos: Position) {
+        locateToUser(pos: any) {
             (this.$refs.mapz as LMap).mapObject.setView([pos.coords.latitude, pos.coords.longitude], 11);
         },
         setMapURL() {
             // tslint:disable-next-line:max-line-length
-            this.mapURL = 'https://api.tiles.mapbox.com/v4/' + this.mapID + '/{z}/{x}/{y}.png?access_token=' + this.accessToken;
+            this.mapURL = 'https://api.mapbox.com/styles/v1/' + this.mapID + '/tiles/{z}/{x}/{y}?access_token=' + this.accessToken;
         },
         createMarkers(events: SingleEvent[]) {
             events.forEach((event: SingleEvent) => this.createMarker(event));
