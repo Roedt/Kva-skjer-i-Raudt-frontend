@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import SingleEvent from './types/SingleEvent.vue';
-import RESTResponse from '@/types/RESTResponse.ts';
+import RESTResponse from '@/types/RESTResponse';
 import moment from 'moment';
 
 const months = [
