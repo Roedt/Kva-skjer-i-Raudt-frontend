@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f820:function(e,n,a){"use strict";a.r(n);var t=function(){var e=this,n=e.$createElement;e._self._c;return e._m(0)},l=[function(){var e=this,n=e.$createElement,a=e._self._c||n;return a("div",{staticClass:"about"},[a("p",[e._v("Denne sida viser alle kommande hendingar frå Raudt- og lokale Raudt-lag sine Facebook-sider.")])])}],s=a("2877"),r={},i=Object(s["a"])(r,t,l,!1,null,null,null);n["default"]=i.exports}}]);
+//# sourceMappingURL=about.7a13f4d6.js.map
