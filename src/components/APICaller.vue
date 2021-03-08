@@ -3,7 +3,6 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import SingleEvent from '@/types/SingleEvent.vue';
-import RESTResponse from '@/types/RESTResponse.ts';
 import EventFactory from '@/EventFactory.vue';
 import moment from 'moment';
 
