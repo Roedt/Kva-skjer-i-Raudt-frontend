@@ -15,7 +15,7 @@
     "leaflet": "^1.5.1",
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "leaflet.markercluster": "^1.4.1",
-    "moment": "^2.27.0",
+    "moment": "^2.29.1",
     "serialize-javascript": "^4.0.0",
     "vue": "^2.6.12",
     "vue-axios": "^2.1.4",
