@@ -19,7 +19,7 @@
     "serialize-javascript": "^4.0.0",
     "vue": "^2.6.12",
     "vue-axios": "^2.1.4",
-    "vue-class-component": "^7.2.5",
+    "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
     "vue-router": "^3.4.3",
     "vue2-leaflet": "^2.1.1",
