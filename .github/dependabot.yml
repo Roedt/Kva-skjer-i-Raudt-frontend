@@ -1,0 +1,18 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: sass-loader
+    versions:
+    - 11.0.0
+    - 11.0.1
+  - dependency-name: elliptic
+    versions:
+    - 6.5.4
+  - dependency-name: "@types/leaflet"
+    versions:
+    - 1.5.23
