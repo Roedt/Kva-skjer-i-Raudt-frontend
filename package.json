@@ -11,18 +11,18 @@
     "@types/leaflet": "1.7.0",
     "@types/leaflet-markercluster": "1.0.3",
     "axios": "0.21.1",
-    "core-js": "3.12.1",
+    "core-js": "3.25.3",
     "leaflet": "1.7.1",
     "leaflet-defaulticon-compatibility": "0.1.1",
     "leaflet.markercluster": "1.5.0",
-    "moment": "2.29.1",
+    "moment": "2.29.4",
     "serialize-javascript": "5.0.1",
     "vue": "2.6.12",
     "vue-axios": "3.2.4",
     "vue-class-component": "7.2.6",
     "vue-property-decorator": "9.1.2",
     "vue-router": "3.5.1",
-    "vue2-leaflet": "2.7.0",
+    "vue2-leaflet": "2.7.1",
     "vue2-leaflet-markercluster": "3.1.0"
   },
   "devDependencies": {
@@ -33,7 +33,7 @@
     "install-peers": "1.0.3",
     "sass": "1.32.13",
     "sass-loader": "^10",
-    "typescript": "4.2.4",
+    "typescript": "4.8.4",
     "vue-template-compiler": "2.6.12"
   }
 }
